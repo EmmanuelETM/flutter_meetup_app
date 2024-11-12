@@ -2,11 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 import 'package:firebase_auth/firebase_auth.dart' 
-    hide EmailAuthProvider, PhoneAuthProvider;    
-import 'package:flutter/material.dart';           
-import 'package:provider/provider.dart';          
-import 'app_state.dart';                          
-import 'src/authentication.dart';                 
+    hide EmailAuthProvider, PhoneAuthProvider;
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'app_state.dart';
+import 'guest_book.dart';
+import 'src/authentication.dart';
 import 'src/widgets.dart';
 
 class HomePage extends StatelessWidget {
@@ -42,6 +43,8 @@ class HomePage extends StatelessWidget {
           const Paragraph(
             'Join us for a day full of Firebase Workshops and Pizza!',
           ),
+          const Header('Discussion'),
+          GuestBook(addMessage: (message) => print(message)),
         ],
       ),
     );
