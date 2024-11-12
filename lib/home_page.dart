@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'app_state.dart';
 import 'guest_book.dart';
+import 'yes_no_selection.dart';
 import 'src/authentication.dart';
 import 'src/widgets.dart';
 
@@ -47,7 +48,18 @@ class HomePage extends StatelessWidget {
             builder: (context, appState, _) => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                switch (appState.attendees) {
+                  1 => const Paragraph('1 person going'),
+                  >= 2 => Paragraph('${appState.attendees} people going'),
+                  _ => const Paragraph('No one going'),
+                },
+                
                 if (appState.loggedIn) ...[
+                  YesNoSelection(
+                    state: appState.attending,
+                    onSelection: (attending) => appState.attending = attending,
+                  ),
+
                   const Header('Discussion'),
                   GuestBook(
                     addMessage: (message) => appState.addMessageToGuestBook(message),
